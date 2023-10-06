@@ -57,3 +57,63 @@ Both Gradient Descent and Newton-Raphson are powerful optimization methods used 
 ---
 
 This README provides a basic understanding of the two methods. Depending on the target audience, you might want to provide more detailed mathematical explanations or code examples.
+
+---
+
+## Newton-Raphson Method for Logistic Regression
+
+The Newton-Raphson method is an iterative optimization algorithm used to find the roots of a real-valued function. In the context of logistic regression, it's employed to maximize the log-likelihood function, or equivalently, minimize the logistic loss.
+
+### Mathematical Formulation
+
+1. **Logistic Function**:
+Given an input vector \( x \) and weights vector \( \theta \), the probability \( p \) is given by:
+
+\[
+p = \frac{1}{{1 + e^{-\theta^T x}}}
+\]
+
+2. **Log-Likelihood Function**:
+For logistic regression, the log-likelihood \( L(\theta) \) over a dataset with \( n \) samples is:
+
+\[
+L(\theta) = \sum_{i=1}^{n} [ y^{(i)} \log(p^{(i)}) + (1 - y^{(i)}) \log(1 - p^{(i)}) ]
+\]
+
+Where \( p^{(i)} \) is the predicted probability for the \( i^{th} \) sample and \( y^{(i)} \) is the actual label.
+
+3. **Gradient and Hessian**:
+To apply the Newton-Raphson method, we need the first and second derivatives of \( L(\theta) \). The gradient \( g \) and Hessian \( H \) are:
+
+\[
+g = \nabla L(\theta) = X^T(y - p)
+\]
+
+\[
+H = -X^T W X
+\]
+
+Where \( X \) is the design matrix, \( p \) is the vector of predicted probabilities for all samples, and \( W \) is a diagonal matrix with \( i^{th} \) diagonal element as \( p^{(i)}(1 - p^{(i)}) \).
+
+4. **Update Rule**:
+The Newton-Raphson update rule is:
+
+\[
+\theta = \theta - H^{-1} g
+\]
+
+This rule is applied iteratively until convergence.
+
+### Advantages of Newton-Raphson:
+
+- **Convergence**: Under certain conditions, the Newton-Raphson method can converge faster than traditional gradient descent.
+- **Explicit Use of Second-Order Information**: By incorporating the Hessian matrix, the method leverages second-order information about the curvature of the log-likelihood function.
+
+### Limitations:
+
+- **Computational Cost**: Inverting the Hessian matrix at each step can be computationally expensive, especially when dealing with high-dimensional data.
+- **Saddle Points**: The method can be sensitive to saddle points where the curvature can be misleading.
+
+---
+
+You can incorporate this markdown explanation into your README or other documentation to provide an overview of the Newton-Raphson method in the context of logistic regression.
